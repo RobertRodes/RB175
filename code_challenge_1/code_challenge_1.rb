@@ -1,6 +1,6 @@
 require 'tilt/erubis'
 require "sinatra"
-require "sinatra/reloader"
+require "sinatra/reloader" if development?
 
 get "/" do
   @filenames = Dir.glob("public/*").reject do |f| 
