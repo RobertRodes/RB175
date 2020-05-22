@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title><%= @title %></title>
+
+    <link rel="stylesheet" href="/stylesheets/pure-min.css">
+    <link rel="stylesheet" href="/stylesheets/fonts.css">
+    <link rel="stylesheet" href="/stylesheets/book_viewer.css">
+  </head>
+
+  <body>
+    <h2 class="content-subhead">Search</h2>
+
+    <form action="/search" method="get">
+      <input name="query" value="<%= params[:query] %>">
+      <button type="submit">Search</button>
+    </form>
+
+    <% if params[:query] %>
+      <% if @results.empty? %>
+        <p>Sorry, no matching results were found.</p>
+      <% else %>
+        <h3 class="content-subhead">Results for "<%= params[:query]%>"</h3>
+        <% @results.each do |result| %>
+          <ul>
+            <li>
+              <a class="pure-menu-link" href="/chapters/<%= result[:chapter] %>"><%= result[:title] %></a>
+              <ul>
+                <% result[:paragraphs].each do |id, text| %>
+                  <li>
+                    <a class="pure-menu-link" style="white-space:inherit" href="/chapters/<%= result[:chapter] %>#<%= id %>">
+                      <%= highlight(text, params[:query]) %>    
+                    </a>
+                  </li>
+                <% end %>
+              </ul>
+            </li>
+          </ul>
+        <% end %>
+      <% end %>
+    <% end %>
+
+
+  </body>
+</html>

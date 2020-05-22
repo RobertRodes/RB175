@@ -1,0 +1,14 @@
+<% @users.each do |k, v| %>    
+  <div class="name">
+    <%= "Name: #{k.to_s.capitalize}" %>
+    <div>
+      <%= "Email: #{v[:email]}" %>
+    </div>
+    <div>
+      <%= "Interests: #{v[:interests].join(', ')}" %>
+    </div>
+  </div>
+<% end %>
+<div id="footer">
+  <%= "There are #{@users.count} users with #{@users.map { |_, v| v[:interests].count }.sum} interests." %>
+</div>

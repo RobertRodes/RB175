@@ -1,0 +1,5 @@
+<% @users.each do |name, _| %>    
+  <div>
+    <a href="/<%=name.to_s%>"><%= name.to_s.capitalize %></a>
+  </div>
+<% end %>

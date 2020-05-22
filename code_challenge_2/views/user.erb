@@ -1,0 +1,19 @@
+<% user = @name.to_s %>
+
+<div>
+  <h3><%=user.capitalize%></h3>
+  <div>
+    <%= "Email: #{@email}" %>
+  </div>
+  <div>
+    <%= "Interests: #{@interests.join(', ')}" %>
+  </div>
+</div>
+
+<div class="sub-footer">
+  <% @users.reject { |name, _| name == user }.each do |name, _| %>
+    <div>
+      <a href="/<%=name.to_s%>"><%= name.to_s.capitalize %></a>
+    </div>
+  <% end %>
+</div>
